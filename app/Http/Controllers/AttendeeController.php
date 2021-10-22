@@ -42,7 +42,7 @@ class AttendeeController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:attendees,email',
             'approved' => 'required',
             'member_since' => 'required',
         ]);
