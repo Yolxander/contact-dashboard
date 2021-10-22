@@ -1,8 +1,7 @@
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add new Attendee') }}
+            {{ __('Add New Attendee') }}
         </h2>
     </x-slot>
 
@@ -20,10 +19,10 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-2 bg-white border-b border-gray-200">
+                <div class="p-2 bg-white border-b border-gray-200 flex justify-center r">
 
 
-                    <form action="{{ route('attendees.store') }}" method="POST">
+                    <form action="{{ route('attendees.store') }}" method="POST" class="w-3/6">
                         @csrf
 
                         <div class="row">
@@ -48,15 +47,16 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>Member Since</strong>
-                                    <input type="date" name="member_since" class="form-control" placeholder="MM/DD/YYYY">
+                                    <input type="date" name="member_since" class="form-control"
+                                           placeholder="MM/DD/YYYY">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>Approved</strong>
                                     <br>
-                                    <input name="approved" type="radio" value="1" /> True
-                                    <input name="approve" type="radio" value="0" /> False
+                                    <input name="approved" type="radio" value="1"/> True
+                                    <input name="approve" type="radio" value="0"/> False
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -73,10 +73,10 @@
 
     @push('scripts')
         <script>
-            $( function() {
-                $( "#datepicker" ).datepicker();
-            } );
+            $(function () {
+                $("#datepicker").datepicker();
+            });
         </script>
     @endpush
 
-    </x-app-layout>
+</x-app-layout>

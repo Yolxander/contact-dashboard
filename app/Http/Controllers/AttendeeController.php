@@ -69,6 +69,6 @@ class AttendeeController extends Controller
         $attendee->delete();
 
         return redirect()->route('attendees.index')
-            ->with('success','Attendee deleted successfully');
+            ->with('delete','Attendee deleted successfully');
     }
 }

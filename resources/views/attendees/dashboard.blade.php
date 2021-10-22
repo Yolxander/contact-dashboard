@@ -9,6 +9,10 @@
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
+    @elseif ($message = Session::get('delete'))
+        <div class="alert alert-danger">
+            <p>{{ $message }}</p>
+        </div>
     @endif
 
 
@@ -17,7 +21,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div>
-                        <a class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" href="{{ route('attendees.create') }}">Add Attendee</a>
+                        <a class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white"
+                           href="{{ route('attendees.create') }}">Add Attendee</a>
                     </div>
                     <table class="table table-dark">
 
@@ -31,26 +36,33 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($attendees as $attendee)
-                        <tr>
-                            <th scope="row">{{ $loop->iteration  }}</th>
-                            <td>{{ $attendee->first_name }}</td>
-                            <td>{{ $attendee->last_name }}</td>
-                            <td>{{ $attendee->member_since}}</td>
+                        @forelse($attendees as $attendee)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration  }}</th>
+                                <td>{{ $attendee->first_name }}</td>
+                                <td>{{ $attendee->last_name }}</td>
+                                <td>{{ $attendee->member_since}}</td>
 
-                            @can('delete attendees')
-                            <td>
-                                <form action="{{ route('attendees.destroy',$attendee->id) }}" method="POST">
+                                @can('delete attendees')
+                                    <td>
+                                        <form action="{{ route('attendees.destroy',$attendee->id) }}" method="POST">
 
-                                    @csrf
-                                    @method('DELETE')
+                                            @csrf
+                                            @method('DELETE')
 
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                            @endcan
-                        </tr>
-                        @endforeach
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                @endcan
+                            </tr>
+                        @empty
+                            <tr>
+                                <th scope="row"></th>
+                                <td>No first name added</td>
+                                <td>No last name added</td>
+                                <td>No date added</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>
